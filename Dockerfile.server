@@ -23,6 +23,7 @@ COPY --from=build /base/.yarn ./.yarn
 COPY --from=build /base/packages/server ./packages/server
 COPY --from=build /base/packages/hub ./packages/hub
 COPY --from=build /base/packages/common ./packages/common
+COPY --from=build /base/packages/tools ./packages/tools
 
 WORKDIR /base/packages/server
 

@@ -22,6 +22,8 @@ COPY --from=build /base/package.json /base/yarn.lock /base/.env /base/.pnp.cjs /
 COPY --from=build /base/.yarn ./.yarn
 COPY --from=build /base/packages/client ./packages/client
 COPY --from=build /base/packages/common ./packages/common
+COPY --from=build /base/packages/tools ./packages/tools
+
 
 WORKDIR /base/packages/client
 
