@@ -11,7 +11,7 @@ phases:
       - region=us-west-2
       - $(aws ecr get-login --region $region --no-include-email)
       - TASK_DEFINITION_FILE=taskdefinition_server.json
-      - REPOSITORY_URI_API=888507318922.dkr.ecr.us-east-2.amazonaws.com/sample-app-api
+      - REPOSITORY_URI_API=${REPOSITORY_URI}
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7) 
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
@@ -19,8 +19,6 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker images...
       - docker build -t sample-app -f ./Dockerfile.server .
-      - echo $REPOSITORY_URI_API
-      - echo $IMAGE_TAG
       - docker tag sample-app $REPOSITORY_URI_API:$IMAGE_TAG
       - docker tag sample-app $REPOSITORY_URI_API:latest
   post_build:
